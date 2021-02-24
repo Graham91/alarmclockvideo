@@ -1,9 +1,14 @@
 const fs = require("fs");
 const { createCanvas, loadImage } = require("canvas");
 var videoshow = require("videoshow");
+// var Utimes = require("@ronomon/utimes");
+// import { timeStamp } from "console";
+// import { utimes } from "utimes";
+const { utimes } = require("utimes");
 
 var images = [];
-
+let timeStamp1 = 447775200000;
+let number1 = 1;
 let colorArrayBegin = [
   "#000000",
   "#03001a",
@@ -49,28 +54,55 @@ createimagefiles(
     createArray(createArray(createArray(createArray(colorArrayBegin))))
   )
 );
-makevideo();
+// makevideo();
 
+// createimagefiles(createArray(colorArrayBegin));
 function createimagefiles(colorsArray) {
   for (let index = 0; index < colorsArray.length - 1; index++) {
     const element = colorsArray[index];
     console.log(element);
     const width = 1280;
     const height = 720;
-
+    const superNumber = zeroFill(index, 3);
     const canvas = createCanvas(width, height);
     const context = canvas.getContext("2d");
 
     context.fillStyle = element;
     context.fillRect(0, 0, width, height);
 
-    const filename = "./" + index + "test.png";
-    const imagefile = index + "test.png";
+    const filename = "./" + superNumber + "test.png";
+    const filepath = __dirname + "/" + superNumber + "test.png";
+    const imagefile = superNumber + "test.png";
     images.push(imagefile);
 
     const buffer = canvas.toBuffer("image/png");
     fs.writeFileSync(filename, buffer);
+    timeStamp1 += 60000;
+    console.log(timeStamp1);
+    utimes(filepath, timeStamp1);
+
+    // fs.utimes(filepath, timeStamp1, timeStamp1, () => {
+    //   // Get the stats object of the file
+    //   console.log("\nDetails after changing time:");
+
+    //   // Get the stats object of the file
+    //   changedStats = fs.statSync(filename);
+
+    //   // Access the changed modified and
+    //   // access time of the file
+    //   console.log("Changed Modification Time:", changedStats.mtime);
+
+    //   console.log("Changed Access Time:", changedStats.atime);
+    // });
   }
+}
+
+function zeroFill(number, width) {
+  width -= number.toString().length;
+  if (width > 0) {
+    return new Array(width + (/\./.test(number) ? 2 : 1)).join("0") + number;
+  }
+  return number + ""; // always return a string
 }
 
 function makevideo() {

@@ -1,12 +1,12 @@
 {
   "name": "alarmclockvideo",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "color.js",
   "dependencies": {
     "canvas": "^2.6.1",
-    "fluent-ffmpeg": "^2.1.2",
     "ffmpeg": "^0.0.4",
+    "fluent-ffmpeg": "^2.1.2",
+    "utimes": "^4.0.3",
     "videoshow": "^0.1.12"
   },
   "devDependencies": {},
@@ -14,5 +14,14 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Graham91/alarmclockvideo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Graham91/alarmclockvideo/issues"
+  },
+  "homepage": "https://github.com/Graham91/alarmclockvideo#readme",
+  "description": ""
 }
